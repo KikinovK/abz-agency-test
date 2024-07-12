@@ -1,0 +1,22 @@
+$color-white: #ffffff;
+$color-black: #000000;
+$color-black-87: rgba(0, 0, 0, 0.87);
+$color-white-87: rgba(255, 255, 255, 0.87);
+
+$color-gray: #7E7E7E;
+
+$primary-color: #F4E041;
+$secondary-color: #00BDD3;
+
+$bg: #D0CFCF;
+$text-color: $color-black;
+$text-color-disable: lighten($text-color, 10%);
+
+$hover-color: #FFE302;
+$disable-color: #B4B4B4;
+$error-color: #CB3D40;
+
+
+
+
+$transition: linear 0.3s;

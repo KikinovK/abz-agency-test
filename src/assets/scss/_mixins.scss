@@ -1,0 +1,95 @@
+@import 'src/assets/scss/variables';
+
+@mixin bp($width, $value: max) {
+  @if $value == min {
+    @media screen and (min-width: $width) {
+      @content;
+    }
+  } @else if $value == max {
+    @media screen and (max-width: $width) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $width) and (min-width: $value) {
+      @content;
+    }
+  }
+}
+
+
+@mixin flex_block(
+  $flex-direction: row,
+  $flex-wrap: wrap,
+  $content: space-between,
+  $align-items: flex-start,
+  $align-content: flex-start
+) {
+  display: flex;
+  flex-direction: $flex-direction;
+  flex-wrap: $flex-wrap;
+  justify-content: $content;
+  align-content: $align-content;
+  align-items: $align-items;
+}
+
+@mixin transition_background {
+  transition: background 0.3s linear;
+  will-change: background;
+}
+
+@mixin transition_color {
+  transition: color 0.3s linear;
+  will-change: color;
+}
+
+@mixin transition_color_background {
+  transition:
+    color 0.3s linear,
+    background 0.3s linear;
+  will-change: color, background;
+}
+
+@mixin transition_transform {
+  transition: transform 0.3s linear;
+  will-change: transform;
+}
+
+@mixin tranisition_fill {
+  transition: fill 0.3s linear;
+  will-change: fill;
+}
+
+@mixin transition_color_transform {
+  transition:
+    color 0.3s linear,
+    transform 0.3s linear;
+  will-change: transform;
+}
+
+@mixin transition_color_transform_background {
+  transition:
+    color 0.3s linear,
+    transform 0.3s linear,
+    background 0.3s linear;
+  will-change: transform, color, background;
+}
+
+@mixin transition_border_color {
+  transition: border-color 0.3s linear;
+  will-change: border-color;
+}
+
+@mixin hover($color: $color-hover, $bg_color: transparent, $scale: 0.9) {
+  @include transition_color_transform_background;
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: $color;
+      background-color: $bg_color;
+    }
+  }
+
+  &:active {
+    transform: scale($scale);
+  }
+}
