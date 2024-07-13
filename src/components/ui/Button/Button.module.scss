@@ -1,0 +1,50 @@
+@import 'src/assets/scss/variables';
+@import 'src/assets/scss/mixins';
+
+.btn {
+  border: 0;
+
+  vertical-align: baseline;
+  box-sizing: border-box;
+  background-color: transparent;
+
+  cursor: pointer;
+
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+
+  &--modeSize {
+    padding: 4px 23px;
+
+    font-size: 16px;
+    line-height: 1.6;
+
+    border-radius: 80px;
+  }
+
+  &--modColorPrime {
+    @include transition_color_transform_background;
+
+    color: $color-black-87;
+    background-color: $primary-color;
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $hover-color;
+      }
+    }
+
+    &:active {
+      background-color: $hover-color;
+    }
+
+    &:disabled {
+      color: $color-white-87;
+      background-color: $disable-color;
+    }
+  }
+
+
+}

@@ -8,7 +8,8 @@ $color-gray: #7E7E7E;
 $primary-color: #F4E041;
 $secondary-color: #00BDD3;
 
-$bg: #D0CFCF;
+$bg: #F8F8F8;
+;
 $text-color: $color-black;
 $text-color-disable: lighten($text-color, 10%);
 
@@ -16,7 +17,9 @@ $hover-color: #FFE302;
 $disable-color: #B4B4B4;
 $error-color: #CB3D40;
 
-
-
-
 $transition: linear 0.3s;
+
+//---------------------------------------------media points
+$point_1: 1024px;
+$point_2: 768px;
+//---------------------------------------------media points

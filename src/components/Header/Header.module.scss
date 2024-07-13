@@ -1,0 +1,26 @@
+@import 'src/assets/scss/variables';
+@import 'src/assets/scss/mixins';
+
+.header {
+
+  padding-top: 13px;
+  padding-bottom: 13px;
+
+  background-color: $color-white;
+
+  @include padding_section;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-left: auto;
+  }
+}

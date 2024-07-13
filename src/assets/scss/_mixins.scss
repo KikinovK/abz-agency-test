@@ -93,3 +93,21 @@
     transform: scale($scale);
   }
 }
+
+@mixin padding_section {
+
+  @include bp($point_1, min) {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  @include bp($point_1 - 1, $point_2) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  @include bp($point_2 - 1) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-@import '_variables';
-@import '_mixins';
+@import 'variables';
+@import 'mixins';
 
 
 * {
@@ -29,4 +29,6 @@ body {
   font-size: 16px;
   font-weight: 400;
   color: $text-color;
+
+  background-color: $bg;
 }
