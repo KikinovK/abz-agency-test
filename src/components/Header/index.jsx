@@ -12,8 +12,8 @@ const Header = () => {
             <Logo />
           </div>
           <nav className={styles.header__nav}>
-            <Button type="button" mods={['modColorPrime', 'modeSize']}>Users</Button>
-            <Button type="button" mods={['modColorPrime', 'modeSize']}>Sign up</Button>
+            <Button href="user" mods={['modColorPrime', 'modeSize']}>Users</Button>
+            <Button href="sign_up" mods={['modColorPrime', 'modeSize']}>Sign up</Button>
           </nav>
         </div>
       </Container>
