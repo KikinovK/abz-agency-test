@@ -1,0 +1,18 @@
+.title {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+
+  &--modMargin1 {
+    &:not(:last-child) {
+      margin-bottom: 21px;
+    }
+  }
+
+  &--modMargin2 {
+    &:not(:last-child) {
+      margin-bottom: 50px;
+    }
+  }
+}

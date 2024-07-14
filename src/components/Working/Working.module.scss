@@ -1,0 +1,46 @@
+@import 'src/assets/scss/variables';
+@import 'src/assets/scss/mixins';
+
+.working {
+  padding-top: 140px;
+
+  @include padding_section;
+
+  &__list {
+    --gap: 29px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+
+    @include bp($point_1 - 1) {
+      gap: 16px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 50px;
+    }
+  }
+
+  &__item {
+    @include bp($point_1, min) {
+      flex: 0 0 calc(33.33% - 2 * var(--gap) / 3);
+      width: calc(33.33% - 2 * var(--gap) / 3);
+    }
+
+    @include bp($point_1 - 1, $point_2) {
+      flex: 0 0 calc(50% - var(--gap) / 2);
+      width: calc(50% - var(--gap) / 2);
+    }
+
+    @include bp($point_2 - 1) {
+      flex: 0 0 100%;
+      width: 100%;
+    }
+  }
+
+  &__button_wrap {
+    display: flex;
+    justify-content: center;
+  }
+}
