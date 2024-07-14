@@ -1,20 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
+import { getCursorHeight } from 'src/utils';
+
 import styles from './EnhancedTooltip.module.scss';
 
 const EnhancedTooltip = ({ children, tag: Tag = 'div', mods=[], ...restProps  }) => {
   const [width, setWidth] = useState(NaN);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [isVisibleTooltip, setIsVisibleTooltip] = useState(false);
   const ref = useRef(null);
 
-  const classNames = [styles.tooltip, ...mods.map(mod => styles[`tooltip--${mod}`])].join(' ');
+  const classNames = [styles.element, ...mods.map(mod => styles[`element--${mod}`])].join(' ');
+  const cursorHeight = getCursorHeight();
 
   useEffect(() => {
     if (ref.current) {
       const handleResize = () => {
-        console.log('ref.current', ref.current);
-        console.log('ref.current.offsetWidth', ref.current.offsetWidth);
-        console.log('ref.current.parentNode.offsetWidth', ref.current.parentNode.offsetWidth);
         setWidth(ref.current.parentNode.offsetWidth);
       };
 
@@ -31,13 +33,40 @@ const EnhancedTooltip = ({ children, tag: Tag = 'div', mods=[], ...restProps  })
     }
   }, [ref.current]);
 
+  const handleMouseOver = (event) => {
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+
+    setTooltipPosition({ x: mouseX, y: mouseY + cursorHeight });
+    setIsVisibleTooltip(true);
+  };
+
+
+  const handleMouseOut = () => {
+    setIsVisibleTooltip(false);
+  };
+
   return (
-    <Tag
-      className={classNames}
-      ref={ref}
-      style={{ maxWidth: `${width}px` }}
-      {...restProps}>{children}
-    </Tag>
+    <>
+      <Tag
+        className={classNames}
+        ref={ref}
+        style={{ maxWidth: `${width}px` }}
+        onMouseMove={handleMouseOver}
+        onMouseOut={handleMouseOut}
+        {...restProps}
+      >
+        {children}
+      </Tag>
+      {isVisibleTooltip && (
+        <div
+          className={styles.element__tooltip}
+          style={{ left: tooltipPosition.x, top: tooltipPosition.y }}
+        >
+          {children}
+        </div>
+      )}
+    </>
   );
 };
 

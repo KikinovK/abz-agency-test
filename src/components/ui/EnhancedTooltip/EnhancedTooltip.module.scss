@@ -1,4 +1,7 @@
-.tooltip {
+@import 'src/assets/scss/variables';
+@import 'src/assets/scss/mixins';
+
+.element {
   display: block;
   width: 100%;
   max-width: 200px;
@@ -10,5 +13,16 @@
 
   &--modCenter {
     text-align: center;
+  }
+
+  &__tooltip {
+    position: fixed;
+
+    padding: 3px 16px;
+
+    color: $color-white;
+
+    background-color: $color-black-87;
+    border-radius: 4px;
   }
 }
