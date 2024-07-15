@@ -79,6 +79,13 @@
   will-change: border-color;
 }
 
+@mixin transition_color_border_color {
+  transition:
+    color 0.3s linear,
+    border-color 0.3s linear;
+  will-change: color, border-color;
+}
+
 @mixin hover($color: $color-hover, $bg_color: transparent, $scale: 0.9) {
   @include transition_color_transform_background;
 

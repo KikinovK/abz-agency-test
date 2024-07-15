@@ -1,0 +1,73 @@
+@import 'src/assets/scss/variables';
+@import 'src/assets/scss/mixins';
+
+.upload {
+  &__wrap {
+    display: flex;
+
+  }
+
+  &__input {
+    position: absolute;
+
+    width: 0;
+    height: 0;
+
+    appearance: none;
+  }
+
+  &__button {
+    @include transition_color_border_color;
+
+    padding: 13px 15px 13px 14px;
+
+    border: 1px solid $color-black-87;
+    border-radius: 4px 0px 0px 4px;
+
+    cursor: pointer;
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: $secondary-color;
+        border-color: $secondary-color;
+      }
+    }
+
+    &:active {
+      color: $secondary-color;
+      border-color: $secondary-color;
+    }
+
+    &--error {
+      border-width: 2px;
+      border-color: $error-color;
+    }
+  }
+
+  &__info {
+    flex-grow: 1;
+
+    padding: 13px 15px;
+
+    border: 1px solid $color-gray1;
+    border-left: none;
+    border-radius: 0px 4px 4px 0px;
+
+    &--pre {
+      color: $color-gray1;
+    }
+
+    &--error {
+      border-width: 2px;
+      border-color: $error-color;
+    }
+  }
+
+  &__errortext {
+    padding-left: 16px;
+
+    font-size: 12px;
+    line-height: 1.17;
+    color: $error-color;
+  }
+}
