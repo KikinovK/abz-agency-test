@@ -23,7 +23,7 @@ const Working = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${BASE_URL}?page=${page}&count=${count}`);
+      const response = await fetch(`${BASE_URL}users?page=${page}&count=${count}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }

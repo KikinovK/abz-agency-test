@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import styles from './InputFiled.module.scss';
 
@@ -6,16 +6,22 @@ const InputFiled = ({
   label,
   helptext,
   errortext,
-  onInput,
+  onBlur,
+  onChange,
   ...restProps
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState('');
 
   const handleFocus = () => setIsFocused(true);
-  const handleBlur = () => {
+  const handleChange = (e) => {
+    setValue(e.target.value);
+    onChange(e);
+  }
+  const handleBlur = (e) => {
     setIsFocused(false);
-    onInput(value);
+    onBlur(e);
+    // onInput(value);
   }
   return (
     <div className={styles.filed}>
@@ -25,7 +31,7 @@ const InputFiled = ({
           className={styles.filed__input}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          onChange={(e) => { setValue(e.target.value) }}
+          onChange={handleChange}
           value={value}
           {...restProps}
         />

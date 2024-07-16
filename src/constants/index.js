@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://frontend-test-assignment-api.abz.agency/api/v1/users';
+export const BASE_URL = 'https://frontend-test-assignment-api.abz.agency/api/v1/';

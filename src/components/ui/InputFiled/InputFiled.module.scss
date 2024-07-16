@@ -30,8 +30,6 @@ $padding-left: 16px;
   }
 
   &__label {
-    @include transition_color_transform;
-
     position: absolute;
     top: 50%;
     left: $padding-left;

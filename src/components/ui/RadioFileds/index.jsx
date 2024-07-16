@@ -1,6 +1,11 @@
 import styles from './RadioFileds.module.scss';
 
-const RadioFileds = ({ title, options, name, onChange, ...restProps }) => {
+const RadioFileds = ({
+  title,
+  options,
+  name,
+  ...restProps
+}) => {
   return (
     <div className={styles.radio}>
       <h3 className={styles.radio__title}>{title}</h3>
@@ -12,7 +17,6 @@ const RadioFileds = ({ title, options, name, onChange, ...restProps }) => {
                 type="radio"
                 name={name}
                 value={option.value}
-                onChange={() => onChange(option.value)}
                 className={styles.radio__input}
                 {...restProps}
               />
