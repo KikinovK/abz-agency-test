@@ -9,6 +9,7 @@ import RadioFileds from 'src/components/ui/RadioFileds';
 import UploadFiled from 'src/components/ui/UploadFiled';
 
 import Preloader from '../Preloader';
+import SuccessSignUp from '../SuccessSignUp';
 
 import validationSchema from 'src/validation/validationSchemaSignUp'
 
@@ -16,10 +17,13 @@ import { BASE_URL } from 'src/constants';
 
 import styles from './SignUp.module.scss';
 
-const SignUp = () => {
+const SignUp = ({onUpload}) => {
   const [positionOptions , setPositionOptions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [errorLoad, setErrorLoad] = useState(null);
+  const [errorUpLoad, setErrorUpLoad] = useState(null);
+  const [isSuccessUpload, setIsSuccessUpload] = useState(false);
 
   const fetchData = async () => {
     setLoading(true);
@@ -35,7 +39,7 @@ const SignUp = () => {
         value: item.id.toString()
       })));
     } catch (error) {
-      setError(error);
+      setErrorLoad(error);
     } finally {
       setLoading(false);
     }
@@ -54,8 +58,51 @@ const SignUp = () => {
       photo: null
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (data) => {
+      try {
+        setUploading(true);
+
+        const formData = new FormData();
+
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            formData.append(key, data[key]);
+          }
+        }
+
+        const responseTocken = await fetch(`${BASE_URL}token`);
+        if (!responseTocken.ok) {
+          throw new Error('Network response token was not ok');
+        }
+        const tokenData = await responseTocken.json();
+        const token = tokenData.token;
+
+        const uploadResponse = await fetch(`${BASE_URL}users`, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Token': token,
+          },
+        });
+
+        if (!uploadResponse.ok) {
+          throw new Error('Failed to upload data');
+        }
+
+        const result = await uploadResponse.json();
+        if (result.success) {
+          setIsSuccessUpload(true);
+        } else {
+          throw new Error('Failed to upload data');
+        }
+
+        onUpload();
+
+      } catch (error) {
+        setErrorUpLoad(error);
+      } finally {
+        setUploading(false);
+      }
     },
   });
 
@@ -68,6 +115,8 @@ const SignUp = () => {
       }
     });
   }, [formik.values]);
+
+  if (isSuccessUpload) return <SuccessSignUp />
 
   return (
     <section className={styles.sign_up}>
@@ -107,8 +156,8 @@ const SignUp = () => {
             </li>
             <li className={styles.sign_up__item}>
               {loading && <Preloader />}
-              {error && <div>Error: {error.message}</div>}
-              {!loading && !error && (
+              {errorLoad && <div>Error: {errorLoad.message}</div>}
+              {!loading && !errorLoad && (
                 <RadioFileds
                   title="Select your position"
                   options={positionOptions}
@@ -133,7 +182,7 @@ const SignUp = () => {
                 <Button
                   type="submit"
                   mods={['modColorPrime', 'modeSize']}
-                  disabled={!(formik.isValid && formik.dirty)}
+                  disabled={!(formik.isValid && formik.dirty) || uploading}
                 >
                   Sign up
                 </Button>
@@ -141,6 +190,7 @@ const SignUp = () => {
             </li>
           </ul>
         </form>
+
       </Container>
     </section>
   );

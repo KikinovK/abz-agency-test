@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import Container from 'src/components/ui/Container';
 import Button from 'src/components/ui/Button';
@@ -11,14 +11,13 @@ import { BASE_URL } from 'src/constants';
 
 import styles from './Working.module.scss';
 
-const Working = () => {
+const Working = ({ isUpload }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
   const [count] = useState(6);
-  const showRef = useRef(null);
 
   const fetchData = async () => {
     setLoading(true);
@@ -29,7 +28,14 @@ const Working = () => {
       }
       const result = await response.json();
       setTotalPages(result.total_pages);
-      setData([...data, ...result.users]);
+
+      if (page > 1) {
+        setData([...data, ...result.users]);
+        return
+      }
+
+      setData(result.users);
+
     } catch (error) {
       setError(error);
     } finally {
@@ -39,13 +45,11 @@ const Working = () => {
 
   useEffect(() => {
     fetchData();
-  }, [page]);
+  }, [page, isUpload]);
 
   useEffect(() => {
-    if (showRef.current) {
-      showRef.current.scrollIntoView();
-    }
-  }, [data]);
+    setPage(1);
+  },[isUpload])
 
   const loadMore = () => {
     setPage(page + 1);
@@ -60,18 +64,18 @@ const Working = () => {
         {!loading && !error && (
           <ul className={styles.working__list}>
             {data.map(item => (
-              <li key={item.id}className={styles.working__item}>
+              <li key={item.id} className={styles.working__item}>
                 <Card {...item} />
               </li>
             ))}
           </ul>
         )}
-        <div className={styles.working__button_wrap}  ref={showRef}>
+        <div className={styles.working__button_wrap} >
           <Button
             type="button"
             mods={['modColorPrime', 'modeSize']}
             onClick={loadMore}
-            disabled={totalPages === page}
+            style={totalPages === page ? {display: 'none'} : {}}
           >
             Show more
           </Button>

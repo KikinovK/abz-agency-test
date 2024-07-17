@@ -17,7 +17,7 @@ const EnhancedTooltip = ({ children, tag: Tag = 'div', mods=[], ...restProps  })
   useEffect(() => {
     if (ref.current) {
       const handleResize = () => {
-        if (ref.current.parentNode) {
+        if (ref.current && ref.current.parentNode) {
           setWidth(ref.current.parentNode.offsetWidth);
         }
       };
