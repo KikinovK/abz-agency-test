@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 const fileDimensions = (file, minWidth, minHeight) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const img = new Image();
     img.src = URL.createObjectURL(file);
     img.onload = () => {

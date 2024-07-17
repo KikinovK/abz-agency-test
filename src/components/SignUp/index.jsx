@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 
 import Container from 'src/components/ui/Container';
@@ -116,7 +116,7 @@ const SignUp = ({onUpload}) => {
     });
   }, [formik.values]);
 
-  if (isSuccessUpload) return <SuccessSignUp />
+  if (isSuccessUpload && !errorUpLoad) return <SuccessSignUp />
 
   return (
     <section className={styles.sign_up}>
