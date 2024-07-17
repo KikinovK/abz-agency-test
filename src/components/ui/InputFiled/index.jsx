@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './InputFiled.module.scss';
 
 const InputFiled = ({
+  id,
   label,
   helptext,
   errortext,
@@ -21,12 +22,12 @@ const InputFiled = ({
   const handleBlur = (e) => {
     setIsFocused(false);
     onBlur(e);
-    // onInput(value);
   }
   return (
     <div className={styles.filed}>
       <div className={`${styles.filed__wrapper} ${errortext ? styles['filed__wrapper--error'] : ''}`}>
         <input
+          id={id}
           type="text"
           className={styles.filed__input}
           onFocus={handleFocus}
@@ -36,6 +37,7 @@ const InputFiled = ({
           {...restProps}
         />
         <label
+          htmlFor={id}
           className={`
             ${styles.filed__label}
             ${isFocused || value ? styles['filed__label--shrink'] : ''}

@@ -127,6 +127,7 @@ const SignUp = ({onUpload}) => {
           <ul className={styles.sign_up__list}>
             <li className={styles.sign_up__item}>
               <InputFiled
+                id="name"
                 name="name"
                 label="Your name"
                 onChange={formik.handleChange}
@@ -136,6 +137,7 @@ const SignUp = ({onUpload}) => {
             </li>
             <li className={styles.sign_up__item}>
               <InputFiled
+                id="email"
                 name="email"
                 type="email"
                 label="Email"
@@ -146,6 +148,7 @@ const SignUp = ({onUpload}) => {
             </li>
             <li className={styles.sign_up__item}>
               <InputFiled
+                id="phone"
                 name="phone"
                 label="Phone"
                 helptext="+38 (XXX) XXX - XX - XX"
