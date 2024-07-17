@@ -1,7 +1,7 @@
 # abz-agency-test
 
 Task Link: [Task](https://drive.google.com/file/d/11XPGP9wrHB-B5aLlBCRLXHVA2yvM2QhY/view)
-Deployment Link: [Demo](https://buyit-shop-f.netlify.app/)
+Deployment Link: [Demo](https://kikinovk.github.io/abz-agency-test/)
 
 ## Technology Stack
 The project uses the following technologies:
